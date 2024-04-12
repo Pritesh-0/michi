@@ -97,6 +97,16 @@ if (BUILD_YOLO_SCRIPT )
     add_dependencies(run_yolo Michi)
     target_link_libraries(run_yolo PRIVATE Michi ${GTEST_LDFLAGS} -fsanitize=address)
 endif()
+
+option(BUILD_BEHAVIOR_TREE_SCRIPT "Build behavior tree script bt.cpp" ON)
+if (BUILD_BEHAVIOR_TREE_SCRIPT)
+    add_executable(run_bt bin/bt.cpp)
+    find_package(behaviortree_cpp)
+    find_package(libzmq)
+    find_package(sqlite3)
+    target_link_libraries(run_bt BT::behaviortree_cpp libzmq sqlite3)
+endif()
+
 install(
     TARGETS
     RUNTIME DESTINATION
