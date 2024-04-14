@@ -1,0 +1,35 @@
+<root BTCPP_format="4" >
+	<BehaviorTree ID="MainTree">
+		<Sequence name="root_sequence">
+			<Fallback name="WPFallback">
+				<AtWP   name="AtWP"/>
+				<GotoWP name="GotoWP"/>
+			</Fallback>
+			<Fallback name="TSFallback">
+				<TubeFound name="TubeFound"/>
+				<SearchTube name="SearchTube" TubePose="{Pose}"/>
+			</Fallback>
+			<Sequence name="TubePlacingSequence">
+				<GotoTube name="GotoTube" TubePose="{Pose}"/>
+				<OpenGripper name="OpenGripper"/>
+				<ApproachTube name="ApproachTube" TubePose="{Pose}"/>
+				<CloseGripper name="CloseGripper"/>
+				<GotoStorage name="GotoStorage"/>
+				<OpenGripper name="OpenGripper"/>
+			</Sequence>
+			<Fallback name="FPFallback">
+				<AtFP name="AtFP"/>
+				<SearchFP name="SearchFP"/>
+			</Fallback>
+			<Fallback name="TDFallback">
+				<TDNearby name="TDNearby"/>
+				<GotoTD name="GotoTD"/>
+			</Fallback>
+			<Sequence name="TubePickingSequence">
+				<PickTube name="PickTube"/>
+				<PlaceTube name="PlaceTube"/>
+				<Park name="Park"/>
+			</Sequence>
+		</Sequence>
+	</BehaviorTree>
+</root>
